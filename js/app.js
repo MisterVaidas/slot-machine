@@ -1,6 +1,7 @@
 'use strict'
 
 let balance = 0; // initialize balance
+let lastWin = 0;
 
 // Function to prompt user to enter deposit amount
 function enterDeposit() {
@@ -37,7 +38,7 @@ function enterDeposit() {
             canPlaceBet = false; // prevent further bet changes
             madeSpin = false; // reset madeSpin
         } else {
-            alert('You dont have enough money to place this bet');
+            alert('You dont have enough credits to place this bet');
         }
      } else {
         alert('You already placed a bet. Please reset a bet or spin the reels');
@@ -63,7 +64,68 @@ function enterDeposit() {
 
   const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']; // the array of symbols
 
+  // Object to store the values of the symbols
+  let symbolValues = {
+    'A': 10,
+    'B': 9,
+    'C': 8,
+    'D': 7,
+    'E': 6,
+    'F': 5,
+    'G': 4,
+    'H': 3,
+    'I': 2,
+    'J': 1
+  };
+
+  function checkForWin() {
+    let reels = document.querySelectorAll('.reel');
+    let slots = Array.from(reels).map(reel => reel.querySelectorAll('.symbol'));
+
+    let linesToCheck = [];
+    if (currentBet >= 1) linesToCheck.push(1);
+    if (currentBet >= 2) linesToCheck.push(0);
+    if (currentBet === 3) linesToCheck.push(2);
+
+   /* let totalWin = 0;
+
+    for (let i of linesToCheck) {
+        let line = slots.map(slot => slot[i].textContent); // Get the symbols on the line
+        if (line.every(symbol => symbol === line[0])) { // Check if all symbols are the same
+            // If they are, the user wins. Add the symbol's value to totalWin.
+            totalWin += symbolValues[line[0]] * currentBet;
+        }
+    }
+
+    if (totalWin > 0) {
+        // Add totalWin to the balance
+        balance += totalWin;
+        updateBalanceDisplay(); // Update displayed balance
+
+        // Update last win
+        lastWin = totalWin;
+        document.querySelector('#last-win').textContent = "Last Win: " + lastWin + " credits";
+
+        alert("You won " + totalWin + " credits!");
+    }
+}*/
+
+    for (let i of linesToCheck) {
+        let line = slots.map(slot => slot[i].textContent); // Get the symbols on the line
+        if (line.every(symbol => symbol === line[0])) { // check if all symbols are the same
+            balance += symbolValues[line[0]] * currentBet;
+            updateBalanceDisplay();
+            alert('You won ' + (symbolValues[line[0]] * currentBet) + ' credits!');
+
+            lastWin = symbolValues[line[0]] * currentBet;
+            document.querySelector('#last-win').textContent = "Last Win: " + lastWin + ' credits';
+
+        }
+    }
+}
+
   function spinReels() { // spin reels function
+
     if (currentBet > 0) {
         if (balance >= currentBet) {
             balance -= currentBet; // deduct bet from the balance
@@ -81,12 +143,14 @@ function enterDeposit() {
         });
         canPlaceBet = true; // allow bet changes
     } else {
-        alert('You dont have enough money to place this bet');
+        alert('You dont have enough credits. Please add more!');
     }
 
     } else {
         alert('You must place a bet first.');
     }
+
+    setTimeout(checkForWin, 2000);
 }
 
 function addCredits(amount) {
@@ -101,14 +165,21 @@ function addCredits(amount) {
 
 document.querySelector('#add-credits').addEventListener('click', function() {
     if (balance === 0) {
-    let amount = parseInt(prompt('Please enter amount you want to add between 1 and 100'));
-    if (amount >= 1 && amount <= 100) {
-        addCredits(amount);
-    } else {
+    let amount;
+
+    do {
+    
+        amount = parseInt(prompt('Please enter amount you want to add between 1 and 100'));
+        if (isNaN(amount) || amount < 1 || amount > 100) {
         alert('Invalid input! Please enter a number from 1 to 100');
-    }
+        }
+
+    } while (isNaN(amount) || amount < 1 || amount > 100);
+
+    addCredits(amount);
+
     } else {
         alert('You still have credits. Play until you run out before adding more.')
-    } 
+    }
 });
   
