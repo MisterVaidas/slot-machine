@@ -31,21 +31,21 @@
 
       <div id="controls">
         <button id="spin">Spin</button>
-        <div id="bet-lines">
-          <button class="bet-line">1 Line</button>
-          <button class="bet-line">2 Lines</button>
-          <button class="bet-line">3 Lines</button>
+        <div id="bettingOptions">
+          <button id="bet1" onclick="placeBet(1)">1 Line</button>
+          <button id="bet2" onclick="placeBet(2)">2 Lines</button>
+          <button id="bet3" onclick="placeBet(3)">3 Lines</button>
+          <button id="resetBet" onclick="resetBet()">Reset Bet</button>
         </div>
         <button id="add-credits">Add Credits</button>
       </div>
       <div id="display">
-        <div id="credits">Credits: 100</div>
-        <div id="bet-amount">Bet: 0</div>
-        <div id="last-win">Last Win: 0</div>
+        <div id="credits">Credits: <span id="balance">0</span></div>
+        <div id="currentBet">Current Bet: <span id="bet">0</span></div>        <div id="last-win">Last Win: 0</div>
       </div>
     </section>
   </main>
-  <script src="js/main.js"></script>
+  <script src="js/app.js"></script>
 </body>
 
 </html>
