@@ -8,7 +8,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.slot-machine {
+#slot-machine {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,9 +18,9 @@ body {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-.reels {
+#reels {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
   padding: 20px;
   margin-bottom: 50px;
@@ -29,36 +29,13 @@ body {
   background: #000;
 }
 
-#reel1 {
+.reel {
   display: flex;
   flex-direction: column;
-  align-content: space-between;
-  justify-content: center;
-  height: auto;
+  justify-content: space-around;
+  height: 200px;
   width: 60px;
-  border-radius: 10px;
-}
-
-.img {
-  object-fit: cover;
-}
-
-#reel2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: auto;
-  width: 60px;
-  border-radius: 10px;
-}
-
-#reel3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: auto;
-  width: 60px;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
 }
 
 #controls {
@@ -68,7 +45,7 @@ body {
   margin-bottom: 20px;
 }
 
-.button {
+button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
@@ -91,8 +68,13 @@ body {
   width: 60px;
   height: 60px;
   background: #fff;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.fruit {
+  width: 50px;
+  height: 50px;
 }
