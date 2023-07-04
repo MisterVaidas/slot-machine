@@ -33,7 +33,7 @@ function enterDeposit() {
         deposit = parseInt(deposit, 10); // Parse the deposit to an number
 
         if(isNaN(deposit) || deposit < 1 || deposit > 100) { // validate deposit amount
-            alert('Invalid deposit amount! Please try again');
+            displayMessage('Invalid deposit amount! Please try again');
             return enterDeposit();
 
         }
@@ -54,17 +54,14 @@ function enterDeposit() {
 
     });
 
-    
-
- 
-  
+    function displayMessage(msg) {
+        document.getElementById('message').textContent = msg;
+    }
 
   // Function to update balance display
   function updateBalanceDisplay() {
     document.getElementById('balance').textContent = balance;
   }
-
- 
 
   enterDeposit();
 
@@ -81,10 +78,10 @@ function enterDeposit() {
             canPlaceBet = false; // prevent further bet changes
             madeSpin = false; // reset madeSpin
         } else {
-            alert('You dont have enough credits to place this bet');
+            displayMessage('You dont have enough credits to place this bet');
         }
      } else {
-        alert('You already placed a bet. Please reset a bet or spin the reels');
+        displayMessage('You already placed a bet. Please reset a bet or spin the reels');
      }
 
     }
@@ -101,16 +98,9 @@ function enterDeposit() {
         canPlaceBet = true; // Allow bet changes
         updateBetDisplay();
     } else {
-        alert('You already made a spin');
+        displayMessage('You already made a spin');
     }
   }
-
-  
-
-
-   // the array of symbols
-
- 
 
   function checkForWin() {
     let reels = document.querySelectorAll('.reel');
@@ -130,9 +120,9 @@ function enterDeposit() {
         });
 
         if (line.every(fruit => fruit.name === line[0].name)) { // check if all symbols are the same
-            balance += line[0].value * currentBet;
+            balance += line[0].value; // * currentBet;
             updateBalanceDisplay();
-            alert('You won ' + (line[0].value * currentBet) + ' credits!');
+            displayMessage('You won ' + (line[0].value * currentBet) + ' credits!');
 
             lastWin = line[0].value * currentBet;
             document.querySelector('#last-win').textContent = "Last Win: " + lastWin + ' credits';
@@ -160,11 +150,11 @@ function enterDeposit() {
         });
         canPlaceBet = true; // allow bet changes
     } else {
-        alert('You dont have enough credits. Please add more!');
+        displayMessage('You dont have enough credits. Please add more!');
     }
 
     } else {
-        alert('You must place a bet first.');
+        displayMessage('You must place a bet first.');
     }
 
     setTimeout(checkForWin, 2000);
@@ -174,7 +164,7 @@ function addCredits() {
     if (balance === 0) {
         document.getElementById('addCreditsModal').style.display = 'block';
     } else {
-        alert('You still have credits. Play until you run out before adding more');
+        displayMessage('You still have credits. Play until you run out before adding more');
 
     }
 }
@@ -186,7 +176,7 @@ document.querySelector('#add-credits').addEventListener('click', addCredits);
    
    
         if (isNaN(amount) || amount < 1 || amount > 100) {
-        alert('Invalid input! Please enter a number from 1 to 100');
+        displayMessage('Invalid input! Please enter a number from 1 to 100');
         return;
         }
 
