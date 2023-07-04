@@ -130,3 +130,15 @@ body {
     width: 80%;
     /* Could be more or less, depending on screen size */
   }
+
+  .fruit {
+    width: 20px; 
+    height: 20px; 
+  }
+
+  .symbol {
+    width: 20px;
+    height: 20px;
+  }
+  
+  

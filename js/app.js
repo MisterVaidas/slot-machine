@@ -62,21 +62,28 @@ function enterDeposit() {
     }
   }
 
-  const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']; // the array of symbols
+  function Fruit(name, value, image) {
 
-  // Object to store the values of the symbols
-  let symbolValues = {
-    'A': 10,
-    'B': 9,
-    'C': 8,
-    'D': 7,
-    'E': 6,
-    'F': 5,
-    'G': 4,
-    'H': 3,
-    'I': 2,
-    'J': 1
-  };
+    this.name = name;
+    this.value = value;
+    this.image = image;
+  }
+
+  const seven = new Fruit('seven', 10, '/images/seven.png');
+  const melon = new Fruit('melon', 9, '/images/melon.png');
+  const plum = new Fruit('plum', 8, '/images/plum.png');
+  const banana = new Fruit('banana', 7, '/images/banana.png');
+  const bar = new Fruit('bar', 6, '/images/bar.png');
+  const orange = new Fruit('orange', 7, '/images/orange.png');
+  const horseshoe = new Fruit('horseshoe', 7, '/images/horseshoe.png');
+  const strawberry = new Fruit('strawberry', 7, '/images/strawberry.png');
+  const bell = new Fruit('bell', 7, '/images/bell.png');
+  const lemon = new Fruit('lemon', 7, '/images/lemon.png');
+
+
+  const fruits = [seven, melon, plum, banana, bar, orange, horseshoe, strawberry, bell, lemon]; // the array of symbols
+
+ 
 
   function checkForWin() {
     let reels = document.querySelectorAll('.reel');
@@ -87,37 +94,20 @@ function enterDeposit() {
     if (currentBet >= 2) linesToCheck.push(0);
     if (currentBet === 3) linesToCheck.push(2);
 
-   /* let totalWin = 0;
+       for (let i of linesToCheck) {
+        let line = slots.map(slot => {
+            let imageSrc = slot[i].querySelector('img').src;
+            let imageName = imageSrc.split('/').pop().split('.')[0];
+            return fruits.find(fruit => fruit.name === imageName);
 
-    for (let i of linesToCheck) {
-        let line = slots.map(slot => slot[i].textContent); // Get the symbols on the line
-        if (line.every(symbol => symbol === line[0])) { // Check if all symbols are the same
-            // If they are, the user wins. Add the symbol's value to totalWin.
-            totalWin += symbolValues[line[0]] * currentBet;
-        }
-    }
+        });
 
-    if (totalWin > 0) {
-        // Add totalWin to the balance
-        balance += totalWin;
-        updateBalanceDisplay(); // Update displayed balance
-
-        // Update last win
-        lastWin = totalWin;
-        document.querySelector('#last-win').textContent = "Last Win: " + lastWin + " credits";
-
-        alert("You won " + totalWin + " credits!");
-    }
-}*/
-
-    for (let i of linesToCheck) {
-        let line = slots.map(slot => slot[i].textContent); // Get the symbols on the line
-        if (line.every(symbol => symbol === line[0])) { // check if all symbols are the same
-            balance += symbolValues[line[0]] * currentBet;
+        if (line.every(fruit => fruit.name === line[0].name)) { // check if all symbols are the same
+            balance += line[0].value * currentBet;
             updateBalanceDisplay();
-            alert('You won ' + (symbolValues[line[0]] * currentBet) + ' credits!');
+            alert('You won ' + (line[0].value * currentBet) + ' credits!');
 
-            lastWin = symbolValues[line[0]] * currentBet;
+            lastWin = line[0].value * currentBet;
             document.querySelector('#last-win').textContent = "Last Win: " + lastWin + ' credits';
 
         }
@@ -137,8 +127,8 @@ function enterDeposit() {
         reels.forEach((reel) => {
             let slots = reel.querySelectorAll('.symbol');
             slots.forEach((slot) => {
-                let randomIndex = Math.floor(Math.random() * symbols.length);
-                slot.textContent = symbols[randomIndex];
+                let randomIndex = Math.floor(Math.random() * fruits.length);
+                slot.querySelector('img').src = fruits[randomIndex].image;
             });
         });
         canPlaceBet = true; // allow bet changes
