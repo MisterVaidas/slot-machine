@@ -20,7 +20,7 @@ body {
 
 .reels {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   padding: 20px;
   margin-bottom: 50px;
@@ -32,7 +32,8 @@ body {
 #reel1 {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-content: space-between;
+  justify-content: center;
   height: auto;
   width: 60px;
   border-radius: 10px;
