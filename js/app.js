@@ -3,6 +3,36 @@
 let balance = 0; // initialize balance
 let lastWin = 0;
 
+function Fruit(name, value, image) {
+  this.name = name;
+  this.value = value;
+  this.image = image;
+}
+
+const seven = new Fruit("seven", 10, "/images/seven.png");
+const melon = new Fruit("melon", 9, "/images/melon.png");
+const plum = new Fruit("plum", 8, "/images/plum.png");
+const banana = new Fruit("banana", 7, "/images/banana.png");
+const bar = new Fruit("bar", 6, "/images/bar.png");
+const orange = new Fruit("orange", 7, "/images/orange.png");
+const horseshoe = new Fruit("horseshoe", 7, "/images/horseshoe.png");
+const strawberry = new Fruit("strawberry", 7, "/images/strawberry.png");
+const bell = new Fruit("bell", 7, "/images/bell.png");
+const lemon = new Fruit("lemon", 7, "/images/lemon.png");
+
+const fruits = [
+  seven,
+  melon,
+  plum,
+  banana,
+  bar,
+  orange,
+  horseshoe,
+  strawberry,
+  bell,
+  lemon,
+];
+
 // Function to prompt user to enter deposit amount
 function enterDeposit() {
   let deposit = prompt("Please enter you deposit amount between 1 and 100: ");
@@ -18,6 +48,15 @@ function enterDeposit() {
   updateBalanceDisplay();
   return deposit;
 }
+
+let reels = document.querySelectorAll(".reel");
+reels.forEach((reel) => {
+  let slots = reel.querySelectorAll(".symbol");
+  slots.forEach((slot) => {
+    let randomIndex = Math.floor(Math.random() * fruits.length);
+    slot.querySelector("img").src = fruits[randomIndex].image;
+  });
+});
 
 // Function to update balance display
 function updateBalanceDisplay() {
@@ -63,36 +102,6 @@ function resetBet() {
     alert("You already made a spin");
   }
 }
-
-function Fruit(name, value, image) {
-  this.name = name;
-  this.value = value;
-  this.image = image;
-}
-
-const seven = new Fruit("seven", 10, "/images/seven.png");
-const melon = new Fruit("melon", 9, "/images/melon.png");
-const plum = new Fruit("plum", 8, "/images/plum.png");
-const banana = new Fruit("banana", 7, "/images/banana.png");
-const bar = new Fruit("bar", 6, "/images/bar.png");
-const orange = new Fruit("orange", 7, "/images/orange.png");
-const horseshoe = new Fruit("horseshoe", 7, "/images/horseshoe.png");
-const strawberry = new Fruit("strawberry", 7, "/images/strawberry.png");
-const bell = new Fruit("bell", 7, "/images/bell.png");
-const lemon = new Fruit("lemon", 7, "/images/lemon.png");
-
-const fruits = [
-  seven,
-  melon,
-  plum,
-  banana,
-  bar,
-  orange,
-  horseshoe,
-  strawberry,
-  bell,
-  lemon,
-]; // the array of symbols
 
 function checkForWin() {
   let reels = document.querySelectorAll(".reel");
