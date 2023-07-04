@@ -3,25 +3,68 @@
 let balance = 0; // initialize balance
 let lastWin = 0;
 
+function Fruit(name, value, image) {
+
+    this.name = name;
+    this.value = value;
+    this.image = image;
+  }
+
+  const seven = new Fruit('seven', 10, '/images/seven.png');
+  const melon = new Fruit('melon', 9, '/images/melon.png');
+  const plum = new Fruit('plum', 8, '/images/plum.png');
+  const banana = new Fruit('banana', 7, '/images/banana.png');
+  const bar = new Fruit('bar', 6, '/images/bar.png');
+  const orange = new Fruit('orange', 7, '/images/orange.png');
+  const horseshoe = new Fruit('horseshoe', 7, '/images/horseshoe.png');
+  const strawberry = new Fruit('strawberry', 7, '/images/strawberry.png');
+  const bell = new Fruit('bell', 7, '/images/bell.png');
+  const lemon = new Fruit('lemon', 7, '/images/lemon.png');
+
+const fruits = [seven, melon, plum, banana, bar, orange, horseshoe, strawberry, bell, lemon];
+
 // Function to prompt user to enter deposit amount
 function enterDeposit() {
-    let deposit = prompt('Please enter you deposit amount between 1 and 100: ');
-    deposit = parseInt(deposit, 10); // Parse the deposit to an number
+    document.getElementById('depositModal').style.display = 'block';
+}
+   
+    document.getElementById('submitDeposit').addEventListener('click', function() {
+        let deposit = document.getElementById('depositAmount').value;
+        deposit = parseInt(deposit, 10); // Parse the deposit to an number
+
+        if(isNaN(deposit) || deposit < 1 || deposit > 100) { // validate deposit amount
+            alert('Invalid deposit amount! Please try again');
+            return enterDeposit();
+
+        }
+
+        let reels = document.querySelectorAll('.reel');
+        reels.forEach((reel) => {
+            let slots = reel.querySelectorAll('.symbol');
+            slots.forEach((slot) => {
+                let randomIndex = Math.floor(Math.random() * fruits.length);
+                slot.querySelector('img').src = fruits[randomIndex].image;
+            });
+            });
+
+        balance += deposit; // update the balance and return deposit
+        updateBalanceDisplay();
+
+        document.getElementById('depositModal').style.display = 'none';
+
+    });
+
+    
+
+ 
   
-    if(isNaN(deposit) || deposit < 1 || deposit > 100) { // validate deposit amount
-      alert('Invalid deposit amount! Please try again');
-      return enterDeposit();
-    }
-  
-    balance += deposit; // update the balance and return deposit
-    updateBalanceDisplay();
-    return deposit;
-  }
 
   // Function to update balance display
   function updateBalanceDisplay() {
     document.getElementById('balance').textContent = balance;
   }
+
+ 
 
   enterDeposit();
 
@@ -62,26 +105,10 @@ function enterDeposit() {
     }
   }
 
-  function Fruit(name, value, image) {
-
-    this.name = name;
-    this.value = value;
-    this.image = image;
-  }
-
-  const seven = new Fruit('seven', 10, '/images/seven.png');
-  const melon = new Fruit('melon', 9, '/images/melon.png');
-  const plum = new Fruit('plum', 8, '/images/plum.png');
-  const banana = new Fruit('banana', 7, '/images/banana.png');
-  const bar = new Fruit('bar', 6, '/images/bar.png');
-  const orange = new Fruit('orange', 7, '/images/orange.png');
-  const horseshoe = new Fruit('horseshoe', 7, '/images/horseshoe.png');
-  const strawberry = new Fruit('strawberry', 7, '/images/strawberry.png');
-  const bell = new Fruit('bell', 7, '/images/bell.png');
-  const lemon = new Fruit('lemon', 7, '/images/lemon.png');
+  
 
 
-  const fruits = [seven, melon, plum, banana, bar, orange, horseshoe, strawberry, bell, lemon]; // the array of symbols
+   // the array of symbols
 
  
 
@@ -143,33 +170,30 @@ function enterDeposit() {
     setTimeout(checkForWin, 2000);
 }
 
-function addCredits(amount) {
+function addCredits() {
     if (balance === 0) {
-        balance += amount;
-        updateBalanceDisplay();
+        document.getElementById('addCreditsModal').style.display = 'block';
     } else {
         alert('You still have credits. Play until you run out before adding more');
 
     }
 }
 
-document.querySelector('#add-credits').addEventListener('click', function() {
-    if (balance === 0) {
-    let amount;
-
-    do {
-    
-        amount = parseInt(prompt('Please enter amount you want to add between 1 and 100'));
+document.querySelector('#add-credits').addEventListener('click', addCredits);
+   document.getElementById('submitAddCredits').addEventListener('click', function() {
+    let amount = document.getElementById('addCreditsAmount').value;
+    amount = parseInt(amount, 10);
+   
+   
         if (isNaN(amount) || amount < 1 || amount > 100) {
         alert('Invalid input! Please enter a number from 1 to 100');
+        return;
         }
 
-    } while (isNaN(amount) || amount < 1 || amount > 100);
+        balance += amount;
+        updateBalanceDisplay();
 
-    addCredits(amount);
+        document.getElementById('addCreditsModal').style.display = 'none';
 
-    } else {
-        alert('You still have credits. Play until you run out before adding more.')
-    }
 });
   

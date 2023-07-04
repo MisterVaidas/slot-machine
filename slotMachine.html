@@ -10,6 +10,7 @@
 
 <body>
   <main>
+    
     <section id="slot-machine">
       <div id="reels">
         <div class="reel">
@@ -37,6 +38,15 @@
           <button id="resetBet" onclick="resetBet()">Reset Bet</button>
         </div>
         <button id="add-credits">Add Credits</button>
+        <div id="addCreditsModal" class="modal">
+          <div class="modal-content">
+            <h2>Add Credits</h2>
+            <p>Please enter the amount of credits you want to add:</p>
+            <input type="number" id="addCreditsAmount" min="1" max="100">
+            <button id="submitAddCredits">Add Credits</button>
+          </div>
+        </div>
+        
       </div>
       <div id="display">
         <div id="credits">Credits: <span id="balance">0</span></div>
@@ -44,6 +54,15 @@
       </div>
     </section>
   </main>
+
+  <div id="depositModal" class="modal">
+    <div class="modal-content">
+      <h2>Welcome to the Fruity Party</h2>
+      <p>Please enter your deposit amount:</p>
+      <input type="number" id="depositAmount" min="1" max="100">
+      <button id="submitDeposit">Submit</button>
+    </div>
+  </div>
   <script src="js/app.js"></script>
 </body>
 
