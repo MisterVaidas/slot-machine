@@ -1,25 +1,26 @@
 #img {
+  display: flex;
+  flex-direction: column;
   height: 60px;
   width: 60px;
 }
-
 #img2 {
+  display: flex;
+  flex-direction: column;
   height: 60px;
   width: 60px;
 }
-
 #img3 {
+  display: flex;
+  flex-direction: column;
   height: 60px;
   width: 60px;
 }
 
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+center {
   transform: translate(-50%, -50%);
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
   border: 3px solid #73ad21;
   padding: 2px;
 }
