@@ -118,5 +118,19 @@ body {
     font-size: 20px;
     text-align: center;
   }
+/* Animations for spinning reels*/
+  @keyframes spin {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  .reel.spin {
+    animation: spin 1s ease-in-out forwards;
+  }
+  
   
   

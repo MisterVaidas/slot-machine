@@ -15,11 +15,11 @@ function Fruit(name, value, image) {
   const plum = new Fruit('plum', 8, '/images/plum.png');
   const banana = new Fruit('banana', 7, '/images/banana.png');
   const bar = new Fruit('bar', 6, '/images/bar.png');
-  const orange = new Fruit('orange', 7, '/images/orange.png');
-  const horseshoe = new Fruit('horseshoe', 7, '/images/horseshoe.png');
-  const strawberry = new Fruit('strawberry', 7, '/images/strawberry.png');
-  const bell = new Fruit('bell', 7, '/images/bell.png');
-  const lemon = new Fruit('lemon', 7, '/images/lemon.png');
+  const orange = new Fruit('orange', 5, '/images/orange.png');
+  const horseshoe = new Fruit('horseshoe', 4, '/images/horseshoe.png');
+  const strawberry = new Fruit('strawberry', 3, '/images/strawberry.png');
+  const bell = new Fruit('bell', 2, '/images/bell.png');
+  const lemon = new Fruit('lemon', 1, '/images/lemon.png');
 
 const fruits = [seven, melon, plum, banana, bar, orange, horseshoe, strawberry, bell, lemon];
 
@@ -33,8 +33,8 @@ function enterDeposit() {
         deposit = parseInt(deposit, 10); // Parse the deposit to an number
 
         if(isNaN(deposit) || deposit < 1 || deposit > 100) { // validate deposit amount
-            displayMessage('Invalid deposit amount! Please try again');
-            return enterDeposit();
+            document.getElementById('depositError').textContent = 'Invalid deposit amount! Please try again';
+            return;
 
         }
 
@@ -51,12 +51,15 @@ function enterDeposit() {
         updateBalanceDisplay();
 
         document.getElementById('depositModal').style.display = 'none';
-
+        document.getElementById('depositError').textContent = '';
     });
 
     function displayMessage(msg) {
         document.getElementById('message').textContent = msg;
+
     }
+    displayMessage('Welcome to Fruity Party! Place your bet and press SPIN. Good luck!');
+
 
   // Function to update balance display
   function updateBalanceDisplay() {
@@ -103,6 +106,7 @@ function enterDeposit() {
   }
 
   function checkForWin() {
+    clearInterval(spinInterval); // Stop the spinning message
     let reels = document.querySelectorAll('.reel');
     let slots = Array.from(reels).map(reel => reel.querySelectorAll('.symbol'));
 
@@ -127,63 +131,116 @@ function enterDeposit() {
             lastWin = line[0].value * currentBet;
             document.querySelector('#last-win').textContent = "Last Win: " + lastWin + ' credits';
 
+        } else {
+            displayMessage('No win, try again.');
         }
     }
 }
 
-  function spinReels() { // spin reels function
+let spinInterval;
 
-    if (currentBet > 0) {
-        if (balance >= currentBet) {
-            balance -= currentBet; // deduct bet from the balance
-            updateBalanceDisplay();
-            madeSpin = true;
+
+  function spinReels() { // spin reels function
+    displayMessage('');
+
+    if (currentBet > 0 && balance >= currentBet) {
+        balance -= currentBet; // deduct bet from the balance
+        updateBalanceDisplay();
+        madeSpin = true;
+
+    // Set up spinning message
+        let dots = '';
+        spinInterval = setInterval(() => {
+        dots = dots.length < 3 ? dots + '.' : '';
+        displayMessage('Spinning' + dots);
+    }, 500); // Interval time can be modified to control speed of animation
+
+     // spin the reels with delay
+     setTimeout(() => spinReel(0), 1000);
+     setTimeout(() => spinReel(1), 2000);
+     setTimeout(() => {
+         spinReel(2);
+         setTimeout(checkForWin, 2000); // Check for win after all reels have stopped spinning
+     }, 3000);
+            //balance -= currentBet; // deduct bet from the balance
+           // updateBalanceDisplay();
+           // madeSpin = true;
+            canPlaceBet = true; // allow bet changes
         
 
         let reels = document.querySelectorAll('.reel');
-        reels.forEach((reel) => {
+        let randomFruits = [];
+
+        reels.forEach((reel, index) => {
+            randomFruits[index] = [];
             let slots = reel.querySelectorAll('.symbol');
             slots.forEach((slot) => {
                 let randomIndex = Math.floor(Math.random() * fruits.length);
-                slot.querySelector('img').src = fruits[randomIndex].image;
+                randomFruits[index].push(fruits[randomIndex].image);
             });
         });
-        canPlaceBet = true; // allow bet changes
+
+        setTimeout(() => {
+            let slots = reels[0].querySelectorAll('.symbol');
+            slots.forEach((slot, index) => {
+                slot.querySelector('img').src = randomFruits[0][index];
+            });
+        }, 1000);
+
+        setTimeout(() => {
+            let slots = reels[1].querySelectorAll('.symbol');
+            slots.forEach((slot, index) => {
+                slot.querySelector('img').src = randomFruits[1][index];
+            });
+        }, 2000);
+
+        setTimeout(() => {
+            let slots = reels[2].querySelectorAll('.symbol');
+            slots.forEach((slot, index) => {
+                slot.querySelector('img').src = randomFruits[2][index];
+            });
+        }, 3000);
+
+    } else if (currentBet === 0) {
+        displayMessage('You must place a bet first.');
+    
+
     } else {
         displayMessage('You dont have enough credits. Please add more!');
     }
 
-    } else {
-        displayMessage('You must place a bet first.');
-    }
-
-    setTimeout(checkForWin, 2000);
+    setTimeout(checkForWin, 3500);
 }
 
 function addCredits() {
-    if (balance === 0) {
-        document.getElementById('addCreditsModal').style.display = 'block';
-    } else {
-        displayMessage('You still have credits. Play until you run out before adding more');
-
-    }
+    document.getElementById('addCreditsModal').style.display = 'block';
 }
 
-document.querySelector('#add-credits').addEventListener('click', addCredits);
-   document.getElementById('submitAddCredits').addEventListener('click', function() {
+document.querySelector('#add-credits').addEventListener('click', function() {
+
+    if (balance === 0) {
+        addCredits();
+
+    } else {
+        displayMessage('You can only add credits if you run out');
+
+    }
+});
+
+document.getElementById('submitAddCredits').addEventListener('click', function() {
     let amount = document.getElementById('addCreditsAmount').value;
     amount = parseInt(amount, 10);
-   
-   
-        if (isNaN(amount) || amount < 1 || amount > 100) {
-        displayMessage('Invalid input! Please enter a number from 1 to 100');
+
+    if(isNaN(amount) || amount < 1 || amount > 100) { // validate deposit amount
+        document.getElementById('addCreditsError').textContent = 'Invalid input! Please enter a number from 1 to 100';
         return;
-        }
+}
 
-        balance += amount;
-        updateBalanceDisplay();
+balance += amount;
+updateBalanceDisplay();
 
-        document.getElementById('addCreditsModal').style.display = 'none';
+document.getElementById('addCreditsError').textContent = '';
+document.getElementById('addCreditsModal').style.display = 'none';
 
 });
   
