@@ -19,6 +19,9 @@ const horseshoe = new Fruit("horseshoe", 7, "/images/horseshoe.png");
 const strawberry = new Fruit("strawberry", 7, "/images/strawberry.png");
 const bell = new Fruit("bell", 7, "/images/bell.png");
 const lemon = new Fruit("lemon", 7, "/images/lemon.png");
+const apple = new Fruit("apple", 7, "/images/apple.png");
+const cherry = new Fruit("cherry", 7, "/images/cherry.png");
+const crown = new Fruit("crown", 7, "/images/crown.png");
 
 const fruits = [
   seven,
@@ -31,7 +34,104 @@ const fruits = [
   strawberry,
   bell,
   lemon,
+  apple,
+  cherry,
+  crown,
 ];
+
+var images = new Array();
+images = [
+  "/images/spin1.png",
+  "/images/spin2.png",
+  "/images/spin3.png",
+  "/images/spin4.png",
+  "/images/spin5.png",
+  "/images/spin6.png",
+  "/images/spin7.png",
+  "/images/spin8.png",
+  "/images/spin9.png",
+  "/images/spin10.png",
+  "/images/spin11.png",
+  "/images/spin12.png",
+  "/images/spin13.png",
+  "/images/spin14.png",
+  "/images/spin15.png",
+  "/images/spin16.png",
+  "/images/spin17.png",
+  "/images/spin18.png",
+  "/images/spin19.png",
+  "/images/spin20.png",
+  "/images/spin21.png",
+  "/images/spin22.png",
+  "/images/spin23.png",
+  "/images/spin24.png",
+  "/images/spin25.png",
+  "/images/spin26.png",
+  "/images/spin27.png",
+  "/images/spin28.png",
+];
+
+setInterval("Animate1()", 60);
+setInterval("Animate2()", 60);
+setInterval("Animate3()", 60);
+
+var x = 1;
+var y = 3;
+var z = 6;
+
+function Animate1() {
+  document.getElementById("img").src = images[x];
+  x++;
+  if (images.length == x) {
+    x = 0;
+  }
+  document.getElementById("img2").src = images[x + 1];
+  x++;
+  if (images.length == x) {
+    x = 0;
+  }
+  document.getElementById("img3").src = images[x + 2];
+  x++;
+  if (images.length == x) {
+    x = 0;
+  }
+}
+
+function Animate2() {
+  document.getElementById("img4").src = images[y];
+  y++;
+  if (images.length == y) {
+    y = 0;
+  }
+  document.getElementById("img5").src = images[y + 1];
+  y++;
+  if (images.length == y) {
+    y = 0;
+  }
+  document.getElementById("img6").src = images[y + 2];
+  y++;
+  if (images.length == y) {
+    y = 0;
+  }
+}
+
+function Animate3() {
+  document.getElementById("img7").src = images[z];
+  z++;
+  if (images.length == z) {
+    z = 0;
+  }
+  document.getElementById("img8").src = images[z + 1];
+  z++;
+  if (images.length == z) {
+    z = 0;
+  }
+  document.getElementById("img9").src = images[z + 2];
+  z++;
+  if (images.length == z) {
+    z = 0;
+  }
+}
 
 // Function to prompt user to enter deposit amount
 function enterDeposit() {
