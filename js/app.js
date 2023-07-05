@@ -14,14 +14,11 @@ const melon = new Fruit("melon", 9, "/images/melon.png");
 const plum = new Fruit("plum", 8, "/images/plum.png");
 const banana = new Fruit("banana", 7, "/images/banana.png");
 const bar = new Fruit("bar", 6, "/images/bar.png");
-const orange = new Fruit("orange", 7, "/images/orange.png");
-const horseshoe = new Fruit("horseshoe", 7, "/images/horseshoe.png");
-const strawberry = new Fruit("strawberry", 7, "/images/strawberry.png");
-const bell = new Fruit("bell", 7, "/images/bell.png");
-const lemon = new Fruit("lemon", 7, "/images/lemon.png");
-const apple = new Fruit("apple", 7, "/images/apple.png");
-const cherry = new Fruit("cherry", 7, "/images/cherry.png");
-const crown = new Fruit("crown", 7, "/images/crown.png");
+const orange = new Fruit("orange", 5, "/images/orange.png");
+const horseshoe = new Fruit("horseshoe", 4, "/images/horseshoe.png");
+const strawberry = new Fruit("strawberry", 3, "/images/strawberry.png");
+const bell = new Fruit("bell", 2, "/images/bell.png");
+const lemon = new Fruit("lemon", 1, "/images/lemon.png");
 
 const fruits = [
   seven,
@@ -34,124 +31,46 @@ const fruits = [
   strawberry,
   bell,
   lemon,
-  apple,
-  cherry,
-  crown,
 ];
-
-var images = new Array(); //images for animation
-images = [
-  "/images/spin1.png",
-  "/images/spin2.png",
-  "/images/spin3.png",
-  "/images/spin4.png",
-  "/images/spin5.png",
-  "/images/spin6.png",
-  "/images/spin7.png",
-  "/images/spin8.png",
-  "/images/spin9.png",
-  "/images/spin10.png",
-  "/images/spin11.png",
-  "/images/spin12.png",
-  "/images/spin13.png",
-  "/images/spin14.png",
-  "/images/spin15.png",
-  "/images/spin16.png",
-  "/images/spin17.png",
-  "/images/spin18.png",
-  "/images/spin19.png",
-  "/images/spin20.png",
-  "/images/spin21.png",
-  "/images/spin22.png",
-  "/images/spin23.png",
-  "/images/spin24.png",
-  "/images/spin25.png",
-  "/images/spin26.png",
-  "/images/spin27.png",
-  "/images/spin28.png",
-];
-
-setInterval("Animate1()", 60); //animation speed setting
-setInterval("Animate2()", 60);
-setInterval("Animate3()", 60);
-
-var x = 1; //these variable set the image in the array that is the starting point of the animation
-var y = 3;
-var z = 6;
-
-function Animate1() {
-  // animation function for reel1
-  document.getElementById("img").src = images[x]; //displays the image at position [x]
-  x++; //increases [x] by 1
-  if (images.length == x) {
-    // checks if x == last image in the animation array
-    x = 0; // if it is then the animation starts again from position [0]
-  }
-  document.getElementById("img2").src = images[x + 1]; //displays the image at position [x+1]
-  x++;
-  if (images.length == x) {
-    x = 0;
-  }
-  document.getElementById("img3").src = images[x + 2]; //displays the image at position [x+2]
-  x++;
-  if (images.length == x) {
-    x = 0;
-  }
-}
-
-function Animate2() {
-  // animation function for reel2
-  document.getElementById("img4").src = images[y];
-  y++;
-  if (images.length == y) {
-    y = 0;
-  }
-  document.getElementById("img5").src = images[y + 1];
-  y++;
-  if (images.length == y) {
-    y = 0;
-  }
-  document.getElementById("img6").src = images[y + 2];
-  y++;
-  if (images.length == y) {
-    y = 0;
-  }
-}
-
-function Animate3() {
-  // animation function for reel3
-  document.getElementById("img7").src = images[z];
-  z++;
-  if (images.length == z) {
-    z = 0;
-  }
-  document.getElementById("img8").src = images[z + 1];
-  z++;
-  if (images.length == z) {
-    z = 0;
-  }
-  document.getElementById("img9").src = images[z + 2];
-  z++;
-  if (images.length == z) {
-    z = 0;
-  }
-}
 
 // Function to prompt user to enter deposit amount
 function enterDeposit() {
-  let deposit = prompt("Please enter you deposit amount between 1 and 100: ");
+  document.getElementById("depositModal").style.display = "block";
+}
+
+document.getElementById("submitDeposit").addEventListener("click", function () {
+  let deposit = document.getElementById("depositAmount").value;
   deposit = parseInt(deposit, 10); // Parse the deposit to an number
 
   if (isNaN(deposit) || deposit < 1 || deposit > 100) {
     // validate deposit amount
-    alert("Invalid deposit amount! Please try again");
-    return enterDeposit();
+    document.getElementById("depositError").textContent =
+      "Invalid deposit amount! Please try again";
+    return;
   }
+
+  let reels = document.querySelectorAll(".reel");
+  reels.forEach((reel) => {
+    let slots = reel.querySelectorAll(".symbol");
+    slots.forEach((slot) => {
+      let randomIndex = Math.floor(Math.random() * fruits.length);
+      slot.querySelector("img").src = fruits[randomIndex].image;
+    });
+  });
 
   balance += deposit; // update the balance and return deposit
   updateBalanceDisplay();
-  return deposit;
+
+  document.getElementById("depositModal").style.display = "none";
+  document.getElementById("depositError").textContent = "";
+});
+
+function displayMessage(msg) {
+  document.getElementById("message").textContent = msg;
 }
+displayMessage(
+  "Welcome to Fruity Party! Place your bet and press SPIN. Good luck!"
+);
 
 let reels = document.querySelectorAll(".reel");
 reels.forEach((reel) => {
@@ -183,10 +102,12 @@ function placeBet(lines) {
       canPlaceBet = false; // prevent further bet changes
       madeSpin = false; // reset madeSpin
     } else {
-      alert("You dont have enough credits to place this bet");
+      displayMessage("You dont have enough credits to place this bet");
     }
   } else {
-    alert("You already placed a bet. Please reset a bet or spin the reels");
+    displayMessage(
+      "You already placed a bet. Please reset a bet or spin the reels"
+    );
   }
 }
 
@@ -203,11 +124,12 @@ function resetBet() {
     canPlaceBet = true; // Allow bet changes
     updateBetDisplay();
   } else {
-    alert("You already made a spin");
+    displayMessage("You already made a spin");
   }
 }
 
 function checkForWin() {
+  clearInterval(spinInterval); // Stop the spinning message
   let reels = document.querySelectorAll(".reel");
   let slots = Array.from(reels).map((reel) => reel.querySelectorAll(".symbol"));
 
@@ -225,69 +147,118 @@ function checkForWin() {
 
     if (line.every((fruit) => fruit.name === line[0].name)) {
       // check if all symbols are the same
-      balance += line[0].value * currentBet;
+      balance += line[0].value; // * currentBet;
       updateBalanceDisplay();
-      alert("You won " + line[0].value * currentBet + " credits!");
+      displayMessage("You won " + line[0].value * currentBet + " credits!");
 
       lastWin = line[0].value * currentBet;
       document.querySelector("#last-win").textContent =
         "Last Win: " + lastWin + " credits";
+    } else {
+      displayMessage("No win, try again.");
     }
   }
 }
+
+let spinInterval;
 
 function spinReels() {
   // spin reels function
+  displayMessage("");
 
-  if (currentBet > 0) {
-    if (balance >= currentBet) {
-      balance -= currentBet; // deduct bet from the balance
-      updateBalanceDisplay();
-      madeSpin = true;
+  if (currentBet > 0 && balance >= currentBet) {
+    balance -= currentBet; // deduct bet from the balance
+    updateBalanceDisplay();
+    madeSpin = true;
 
-      let reels = document.querySelectorAll(".reel");
-      reels.forEach((reel) => {
-        let slots = reel.querySelectorAll(".symbol");
-        slots.forEach((slot) => {
-          let randomIndex = Math.floor(Math.random() * fruits.length);
-          slot.querySelector("img").src = fruits[randomIndex].image;
-        });
+    // Set up spinning message
+    let dots = "";
+    spinInterval = setInterval(() => {
+      dots = dots.length < 3 ? dots + "." : "";
+      displayMessage("Spinning" + dots);
+    }, 500); // Interval time can be modified to control speed of animation
+
+    // spin the reels with delay
+    setTimeout(() => spinReel(0), 1000);
+    setTimeout(() => spinReel(1), 2000);
+    setTimeout(() => {
+      spinReel(2);
+      setTimeout(checkForWin, 2000); // Check for win after all reels have stopped spinning
+    }, 3000);
+    //balance -= currentBet; // deduct bet from the balance
+    // updateBalanceDisplay();
+    // madeSpin = true;
+    canPlaceBet = true; // allow bet changes
+
+    let reels = document.querySelectorAll(".reel");
+    let randomFruits = [];
+
+    reels.forEach((reel, index) => {
+      randomFruits[index] = [];
+      let slots = reel.querySelectorAll(".symbol");
+      slots.forEach((slot) => {
+        let randomIndex = Math.floor(Math.random() * fruits.length);
+        randomFruits[index].push(fruits[randomIndex].image);
       });
-      canPlaceBet = true; // allow bet changes
-    } else {
-      alert("You dont have enough credits. Please add more!");
-    }
+    });
+
+    setTimeout(() => {
+      let slots = reels[0].querySelectorAll(".symbol");
+      slots.forEach((slot, index) => {
+        slot.querySelector("img").src = randomFruits[0][index];
+      });
+    }, 1000);
+
+    setTimeout(() => {
+      let slots = reels[1].querySelectorAll(".symbol");
+      slots.forEach((slot, index) => {
+        slot.querySelector("img").src = randomFruits[1][index];
+      });
+    }, 2000);
+
+    setTimeout(() => {
+      let slots = reels[2].querySelectorAll(".symbol");
+      slots.forEach((slot, index) => {
+        slot.querySelector("img").src = randomFruits[2][index];
+      });
+    }, 3000);
+  } else if (currentBet === 0) {
+    displayMessage("You must place a bet first.");
   } else {
-    alert("You must place a bet first.");
+    displayMessage("You dont have enough credits. Please add more!");
   }
 
-  setTimeout(checkForWin, 2000);
+  setTimeout(checkForWin, 3500);
 }
 
-function addCredits(amount) {
-  if (balance === 0) {
-    balance += amount;
-    updateBalanceDisplay();
-  } else {
-    alert("You still have credits. Play until you run out before adding more");
-  }
+function addCredits() {
+  document.getElementById("addCreditsModal").style.display = "block";
 }
 
 document.querySelector("#add-credits").addEventListener("click", function () {
   if (balance === 0) {
-    let amount;
-
-    do {
-      amount = parseInt(
-        prompt("Please enter amount you want to add between 1 and 100")
-      );
-      if (isNaN(amount) || amount < 1 || amount > 100) {
-        alert("Invalid input! Please enter a number from 1 to 100");
-      }
-    } while (isNaN(amount) || amount < 1 || amount > 100);
-
-    addCredits(amount);
+    addCredits();
   } else {
-    alert("You still have credits. Play until you run out before adding more.");
+    displayMessage("You can only add credits if you run out");
   }
 });
+
+document
+  .getElementById("submitAddCredits")
+  .addEventListener("click", function () {
+    let amount = document.getElementById("addCreditsAmount").value;
+    amount = parseInt(amount, 10);
+
+    if (isNaN(amount) || amount < 1 || amount > 100) {
+      // validate deposit amount
+      document.getElementById("addCreditsError").textContent =
+        "Invalid input! Please enter a number from 1 to 100";
+      return;
+    }
+
+    balance += amount;
+    updateBalanceDisplay();
+
+    document.getElementById("addCreditsError").textContent = "";
+    document.getElementById("addCreditsModal").style.display = "none";
+  });

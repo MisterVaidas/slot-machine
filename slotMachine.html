@@ -7,62 +7,42 @@
     <link rel="stylesheet" href="/css/slotMachine.css" />
   </head>
 
-  <body>
-    <main>
-      <section id="slot-machine">
-        <div id="reels">
-          <div class="reel">
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img2" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img3" />
-            </div>
-          </div>
-          <div class="reel">
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img4" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img5" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img6" />
-            </div>
-          </div>
-          <div class="reel">
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img7" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img8" />
-            </div>
-            <div class="symbol">
-              <img class="fruit" src="" alt="" /><img class="fruit" id="img9" />
-            </div>
-          </div>
+<body>
+  <main>
+    <section id="slot-machine">
+      <div id="reels">
+        <div class="reel">
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+        </div>
+        <div class="reel">
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+        </div>
+        <div class="reel">
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
+          <div class="symbol"><img class="fruit" src="" alt=""></div>
         </div>
 
-        <div id="controls">
-          <button id="spin" onclick="spinReels()">Spin</button>
-          <div id="bettingOptions">
-            <button id="bet1" onclick="placeBet(1)">1 Line</button>
-            <button id="bet2" onclick="placeBet(2)">2 Lines</button>
-            <button id="bet3" onclick="placeBet(3)">3 Lines</button>
-            <button id="resetBet" onclick="resetBet()">Reset Bet</button>
-          </div>
-          <button id="add-credits">Add Credits</button>
+      <div id="controls">
+          <button id="spin" onclick="spinReels()">Spin</button>        <div id="bettingOptions">
+          <button id="bet1" onclick="placeBet(1)">1 Line</button>
+          <button id="bet2" onclick="placeBet(2)">2 Lines</button>
+          <button id="bet3" onclick="placeBet(3)">3 Lines</button>
+          <button id="resetBet" onclick="resetBet()">Reset Bet</button>
         </div>
-        <div id="display">
-          <div id="credits">Credits: <span id="balance">0</span></div>
-          <div id="currentBet">Current Bet: <span id="bet">0</span></div>
-          <div id="last-win">Last Win: 0</div>
-        </div>
-      </section>
-    </main>
-    <script src="js/app.js"></script>
-  </body>
+        <button id="add-credits">Add Credits</button>
+      </div>
+      <div id="display">
+        <div id="credits">Credits: <span id="balance">0</span></div>
+        <div id="currentBet">Current Bet: <span id="bet">0</span></div>        <div id="last-win">Last Win: 0</div>
+      </div>
+    </section>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+
 </html>
