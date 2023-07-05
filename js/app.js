@@ -39,7 +39,7 @@ const fruits = [
   crown,
 ];
 
-var images = new Array();
+var images = new Array(); //images for animation
 images = [
   "/images/spin1.png",
   "/images/spin2.png",
@@ -71,26 +71,28 @@ images = [
   "/images/spin28.png",
 ];
 
-setInterval("Animate1()", 60);
+setInterval("Animate1()", 60); //animation speed setting
 setInterval("Animate2()", 60);
 setInterval("Animate3()", 60);
 
-var x = 1;
+var x = 1; //these variable set the image in the array that is the starting point of the animation
 var y = 3;
 var z = 6;
 
 function Animate1() {
-  document.getElementById("img").src = images[x];
+  // animation function for reel1
+  document.getElementById("img").src = images[x]; //displays the image at position [x]
+  x++; //increases [x] by 1
+  if (images.length == x) {
+    // checks if x == last image in the animation array
+    x = 0; // if it is then the animation starts again from position [0]
+  }
+  document.getElementById("img2").src = images[x + 1]; //displays the image at position [x+1]
   x++;
   if (images.length == x) {
     x = 0;
   }
-  document.getElementById("img2").src = images[x + 1];
-  x++;
-  if (images.length == x) {
-    x = 0;
-  }
-  document.getElementById("img3").src = images[x + 2];
+  document.getElementById("img3").src = images[x + 2]; //displays the image at position [x+2]
   x++;
   if (images.length == x) {
     x = 0;
@@ -98,6 +100,7 @@ function Animate1() {
 }
 
 function Animate2() {
+  // animation function for reel2
   document.getElementById("img4").src = images[y];
   y++;
   if (images.length == y) {
@@ -116,6 +119,7 @@ function Animate2() {
 }
 
 function Animate3() {
+  // animation function for reel3
   document.getElementById("img7").src = images[z];
   z++;
   if (images.length == z) {
