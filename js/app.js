@@ -264,31 +264,13 @@ let animate3 = function () {
   }
 };
 
-let Animate1, Animate2, Animate3;
 let interval1, interval2, interval3;
 
-function spinReels() {
-  // spin reels function
-  displayMessage("");
-
-  clearInterval(interval1);
-  clearInterval(interval2);
-  clearInterval(interval3);
-
-  interval1 = setInterval(animate1, 30);
-  interval2 = setInterval(animate2, 30);
-  interval3 = setInterval(animate3, 30);
-
-  //setTimeout(stopAnimation, 3000);
-}
-// Hide the animation
 function stopAnimation1() {
   clearInterval(interval1);
   document.getElementById("img").style.display = "none";
   document.getElementById("img2").style.display = "none";
   document.getElementById("img3").style.display = "none";
-
-  spinning = false;
 }
 
 function stopAnimation2() {
@@ -296,8 +278,6 @@ function stopAnimation2() {
   document.getElementById("img4").style.display = "none";
   document.getElementById("img5").style.display = "none";
   document.getElementById("img6").style.display = "none";
-
-  spinning = false;
 }
 
 function stopAnimation3() {
@@ -305,41 +285,35 @@ function stopAnimation3() {
   document.getElementById("img7").style.display = "none";
   document.getElementById("img8").style.display = "none";
   document.getElementById("img9").style.display = "none";
-
-  spinning = false;
 }
 
-function spin() {
-  if (spinning) {
-    return;
-  }
+document.getElementById("img").style.display = "block";
+document.getElementById("img2").style.display = "block";
+document.getElementById("img3").style.display = "block";
 
-  document.getElementById("img").style.display = "block";
-  document.getElementById("img2").style.display = "block";
-  document.getElementById("img3").style.display = "block";
+document.getElementById("img4").style.display = "block";
+document.getElementById("img5").style.display = "block";
+document.getElementById("img6").style.display = "block";
 
-  document.getElementById("img4").style.display = "block";
-  document.getElementById("img5").style.display = "block";
-  document.getElementById("img6").style.display = "block";
+document.getElementById("img7").style.display = "block";
+document.getElementById("img8").style.display = "block";
+document.getElementById("img9").style.display = "block";
 
-  document.getElementById("img7").style.display = "block";
-  document.getElementById("img8").style.display = "block";
-  document.getElementById("img9").style.display = "block";
+spinning = true;
+// Start animations
+// spinReels();
 
-  spinning = true;
-  // Start animations
-  spinReels();
+// setTimeout(stopAnimation1, 1000); // Stop Animate1 after 3 seconds
+// setTimeout(stopAnimation2, 2000); // Stop Animate2 after 3.5 seconds
+// setTimeout(stopAnimation3, 3000); // Stop Animate3 after 4 seconds
 
-  setTimeout(stopAnimation1, 1000); // Stop Animate1 after 3 seconds
-  setTimeout(stopAnimation2, 2000); // Stop Animate2 after 3.5 seconds
-  setTimeout(stopAnimation3, 3000); // Stop Animate3 after 4 seconds
-  setTimeout(function () {
-    spinning = false;
-  }, 3100);
+// setTimeout(function () {
+//   spinning = false;
+// }, 3100);
 
-  //stopAnimation();
-  //setTimeout(stopAnimation, 3000);
-}
+// stopAnimation();
+// setTimeout(stopAnimation, 3000);
+// }
 
 if (currentBet > 0 && balance >= currentBet) {
   balance -= currentBet; // deduct bet from the balance
