@@ -19,10 +19,6 @@ body {
     padding: 20px;
   }
   
-  /*nav ul {
-    list-style: none;
-    padding: 0;
-  }*/
   
   nav {
     display: inline;
@@ -131,14 +127,8 @@ body {
     /* Could be more or less, depending on screen size */
   }
 
-  .fruit {
-    width: 20px; 
-    height: 20px; 
-  }
+ 
 
-  .symbol {
-    width: 20px;
-    height: 20px;
-  }
+  
   
   
