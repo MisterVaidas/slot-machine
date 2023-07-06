@@ -8,69 +8,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#img {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img2 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img3 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img4 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img5 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img6 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img7 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img8 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
-#img9 {
-  position: absolute;
-  height: 60px;
-  width: 60px;
-  z-index: 5;
-}
-
 #slot-machine {
   display: flex;
   flex-direction: column;
@@ -96,8 +33,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 190px;
+  height: 200px;
   width: 60px;
+  /*border-radius: 10px;*/
 }
 
 #controls {
@@ -107,7 +45,7 @@ body {
   margin-bottom: 20px;
 }
 
-.button {
+button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
@@ -130,14 +68,109 @@ body {
   width: 60px;
   height: 60px;
   background: #fff;
+  /*border-radius: 10px;*/
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .fruit {
+  display: block;
   position: absolute;
   width: 60px;
   height: 60px;
-  z-index: 4;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+#message-display {
+  width: 80%;
+  height: 100px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: #000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#message {
+  color: #0f0;
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  text-align: center;
+}
+
+#img {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img2 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img3 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img4 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img5 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img6 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img7 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img8 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img9 {
+  position: absolute;
+  height: 60px;
+  width: 60px;
 }
