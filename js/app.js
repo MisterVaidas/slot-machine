@@ -10,16 +10,16 @@ function Fruit(name, value, image) {
   this.image = image;
 }
 
-const seven = new Fruit('seven', 10, '/images/seven.png');
-const melon = new Fruit('melon', 9, '/images/melon.png');
-const plum = new Fruit('plum', 8, '/images/plum.png');
-const banana = new Fruit('banana', 7, '/images/banana.png');
-const bar = new Fruit('bar', 6, '/images/bar.png');
-const orange = new Fruit('orange', 5, '/images/orange.png');
-const horseshoe = new Fruit('horseshoe', 4, '/images/horseshoe.png');
-const strawberry = new Fruit('strawberry', 3, '/images/strawberry.png');
-const bell = new Fruit('bell', 2, '/images/bell.png');
-const lemon = new Fruit('lemon', 1, '/images/lemon.png');
+const seven = new Fruit('seven', 10, 'images/seven.png');
+const melon = new Fruit('melon', 9, 'images/melon.png');
+const plum = new Fruit('plum', 8, 'images/plum.png');
+const banana = new Fruit('banana', 7, 'images/banana.png');
+const bar = new Fruit('bar', 6, 'images/bar.png');
+const orange = new Fruit('orange', 5, 'images/orange.png');
+const horseshoe = new Fruit('horseshoe', 4, 'images/horseshoe.png');
+const strawberry = new Fruit('strawberry', 3, 'images/strawberry.png');
+const bell = new Fruit('bell', 2, 'images/bell.png');
+const lemon = new Fruit('lemon', 1, 'images/lemon.png');
 
 const fruits = [seven, melon, plum, banana, bar, orange, horseshoe, strawberry, bell, lemon];
 
