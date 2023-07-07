@@ -156,15 +156,15 @@ function spinReels() { // spin reels function
     }, 500); // Interval time can be modified to control speed of animation
 
     // spin the reels with delay
-    setTimeout(() => spinReel(0), 1000);
+    /*setTimeout(() => spinReel(0), 1000);
     setTimeout(() => spinReel(1), 2000);
     setTimeout(() => {
       spinReel(2);
       setTimeout(checkForWin, 2000); // Check for win after all reels have stopped spinning
-    }, 3000);
+    }, 3000);*/
     //balance -= currentBet; // deduct bet from the balance
-    // updateBalanceDisplay();
-    // madeSpin = true;
+    updateBalanceDisplay();
+    madeSpin = true;
     canPlaceBet = true; // allow bet changes
 
 
@@ -243,3 +243,48 @@ document.getElementById('submitAddCredits').addEventListener('click', function()
   document.getElementById('addCreditsModal').style.display = 'none';
 
 });
+
+const spinAudio = new Audio('audio/spin.mp3');
+const outOfCreditAudio = new Audio('audio/outOfCreditSpin.mp3');
+
+document.getElementById('spin').addEventListener('click', function() {
+    if (balance <= 0) {
+        outOfCreditAudio.currentTime = 0; 
+        outOfCreditAudio.play();
+    } else {
+        spinAudio.currentTime = 0; 
+        spinAudio.play();
+    
+    
+  }
+
+});
+
+const betAudio = new Audio('audio/bet.mp3'); 
+
+// Array of button IDs
+const buttonIds = ['bet1', 'bet2', 'bet3', 'resetBet'];
+
+buttonIds.forEach(function(id) {
+  var button = document.getElementById(id);
+
+  button.addEventListener('click', function() {
+    betAudio.currentTime = 0; 
+    betAudio.play();
+  });
+});
+
+const addCreditAudio = new Audio('audio/credit.mp3');
+const noCreditAudio = new Audio('audio/noCredit.mp3');
+document.getElementById('add-credits').addEventListener('click', function() {
+ if (balance > 0) {
+  noCreditAudio.currentTime = 0;
+  noCreditAudio.play();
+ } else {
+  addCreditAudio.currentTime = 0;
+  addCreditAudio.play();
+ }
+});
+
+
+
