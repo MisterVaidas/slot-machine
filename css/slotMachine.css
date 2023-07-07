@@ -40,7 +40,8 @@ body {
   justify-content: space-around;
   height: 200px;
   width: 60px;
-  /*border-radius: 10px;*/
+  border: 5px solid #fff;
+  animation: rainbow-border 2s infinite;
 }
 
 #controls {
@@ -71,10 +72,11 @@ button {
   font-size: 18px;
   color: #0f0;
   border: solid 3px black;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .symbol {
+  /* position: absolute; */
   width: 60px;
   height: 60px;
   background: #fff;
@@ -85,8 +87,9 @@ button {
 }
 
 .fruit {
-  width: 50px;
-  height: 50px;
+  position: absolute;
+  width: 60px;
+  height: 60px;
 }
 
 .modal {
@@ -100,6 +103,7 @@ button {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 
 .modal-content {
@@ -108,6 +112,7 @@ button {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  z-index: 10;
 }
 
 #message-display {
@@ -121,14 +126,14 @@ button {
   align-items: center;
   justify-content: center;
   border: solid 5px blue;
-  /* box-shadow: 0 0 10px #00ff00, inset 0 0 10px #ff0000;*/
+  box-shadow: 0 0 10px #00ff00, inset 0 0 10px #ff0000;
   -webkit-box-shadow: 0 0 10px #00ff00, inset 0 0 10px #ff0000;
   -moz-box-shadow: 0 0 10px #00ff00, inset 0 0 10px #ff0000;
 }
 
 #message {
   color: #0f0;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 20px;
   text-align: center;
 }
@@ -188,10 +193,12 @@ button {
 
 @keyframes neon {
   from {
-    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff4000;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000,
+      0 0 40px #ff4000;
   }
   to {
-    text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff4000, 0 0 75px #ff4000;
+    text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000,
+      0 0 50px #ff4000, 0 0 75px #ff4000;
   }
 }
 
@@ -282,3 +289,70 @@ body {
   }
 }
 
+#img {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img2 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img3 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img4 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img5 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img6 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img7 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img8 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+#img9 {
+  display: inherit;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+}
+
+.hidden {
+  width: 0px;
+  height: 0px;
+}
